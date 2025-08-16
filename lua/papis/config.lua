@@ -6,6 +6,9 @@
 --
 
 -- default configuration values
+
+local utils = require("papis.utils")
+
 local default_config = {
   enable_modules = {
     ["at-cursor"] = true,
