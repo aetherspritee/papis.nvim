@@ -176,7 +176,7 @@ function M:do_open_text_file(papis_id, type)
       popup:map("n", { "Y", "y", "<cr>" }, function(_)
         popup:unmount()
         local config = require("papis.config")
-        entry = db.data:get({ papis_id = papis_id })[1]
+        entry = db.data:get({ papis_id = papis_id }, { "ref" })[1]
         local create_new_note_fn = config.create_new_note_fn
         local notes_name = db.config:get_conf_value("notes_name")
         local slug = os.date("%Y%m%d%H%M%S")
@@ -188,6 +188,7 @@ function M:do_open_text_file(papis_id, type)
           0,
           5,
           vim.schedule_wrap(function()
+            entry = db.data:get({ papis_id = papis_id })[1]
             if entry.notes and not file_opened then
               local enable_modules = config.enable_modules
               if enable_modules["formatter"] then
