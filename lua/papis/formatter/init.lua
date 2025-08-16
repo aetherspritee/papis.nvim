@@ -26,6 +26,7 @@ function M.format_entire_file(entry)
   local lines = config["formatter"].format_notes(entry)
   table.insert(lines, ":PROPERTIES:")
   table.insert(lines, ":ID:       " .. generate_uuid())
+  table.insert(lines, ":ROAM_REFS:       @" .. entry.ref)
   table.insert(lines, ":END:")
   table.insert(lines, "#+title: " .. entry.ref)
   local notes_path = entry.notes[1]
