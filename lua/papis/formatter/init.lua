@@ -12,9 +12,22 @@ local api = vim.api
 
 local M = {}
 
+-- Function to generate a random UUID
+local function generate_uuid()
+  local template = "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx"
+  return string.gsub(template, "[xy]", function(c)
+    local v = (c == "x") and math.random(0, 0xf) or math.random(8, 0xb)
+    return string.format("%x", v)
+  end)
+end
+
 function M.format_entire_file(entry)
   log.debug("Formatting new notes file")
   local lines = config["formatter"].format_notes(entry)
+  table.insert(lines, ":PROPERTIES:")
+  table.insert(lines, ":ID:       " .. generate_uuid())
+  table.insert(lines, ":END:")
+  table.insert(lines, "")
   local notes_path = entry.notes[1]
   local buf = api.nvim_create_buf(false, false)
   api.nvim_buf_set_name(buf, notes_path)

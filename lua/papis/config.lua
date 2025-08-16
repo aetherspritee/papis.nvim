@@ -91,22 +91,7 @@ local default_config = {
   enable_icons = true,
   ["formatter"] = {
     format_notes = function(entry)
-      local title_format = {
-        { "author", "%s ",   "" },
-        { "year",   "(%s) ", "" },
-        { "title",  "%s",    "" },
-      }
-      local title = require("papis.utils"):format_display_strings(entry, title_format, true)
-      for k, v in ipairs(title) do
-        title[k] = v[1]
-      end
-      local lines = {
-        "---",
-        'title: "Notes -- ' .. table.concat(title) .. '"',
-        "---",
-        "",
-      }
-      return lines
+      return {}
     end,
     format_references = function(entry)
       local reference_format = {

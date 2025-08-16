@@ -178,6 +178,8 @@ function M:do_open_text_file(papis_id, type)
         local config = require("papis.config")
         local create_new_note_fn = config.create_new_note_fn
         local notes_name = db.config:get_conf_value("notes_name")
+        local slug = os.date("%Y%m%d%H%M%S")
+        notes_name = slug .. "-" .. notes_name
         create_new_note_fn(papis_id, notes_name)
         local entry_has_note = new_timer()
         local file_opened = false
