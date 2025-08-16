@@ -94,13 +94,7 @@ local default_config = {
   enable_icons = true,
   ["formatter"] = {
     format_notes = function(entry)
-      local lines = {
-        ":PROPERTIES:",
-        ":ID:       " .. utils.generate_uuid(),
-        ":END:",
-        "",
-        "#+title: " .. entry.ref,
-      }
+      local lines = {}
       return lines
     end,
     format_references = function(entry)
